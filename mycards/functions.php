@@ -31,5 +31,28 @@ function process_HTTP_exception($exc, $terminate) {
 		echo 'HTTP exception: ' . $egm . ' at '. $egl;
 }
 
+function getRemoteIP() {
+	$ipaddress = '';
+	if ($_SERVER['HTTP_CLIENT_IP'])
+		$ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+	else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+		$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	else if($_SERVER['HTTP_X_FORWARDED'])
+		$ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+	else if($_SERVER['HTTP_FORWARDED_FOR'])
+		$ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+	else if($_SERVER['HTTP_FORWARDED'])
+		$ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
 
+	return $ipaddress;
+}
+
+function writeLog($message) {
+	$LOGFILE = 'logfile.txt';
+	file_put_contents($LOGFILE, '[' . date("Y-m-d H:i:s"). '] ' . $message, FILE_APPEND);
+}
 ?>
