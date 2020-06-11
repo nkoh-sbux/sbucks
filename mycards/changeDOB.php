@@ -9,8 +9,8 @@ require_once 'class.starbucks.php';
 $http = new HTTP_Request2();
 $sb = new Starbucks($http);
 
-$email = 'bered9410@jourrapide.com';
-$pw = 'password123';
+$email = '';
+$pw = '';
 $dd = rand(1,28);
 $mm = '04';
 $yy = 1970+rand(1,28);
